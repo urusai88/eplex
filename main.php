@@ -98,6 +98,7 @@ function compute_cost($data, $result): int
         foreach ($data as $dataKey => $dataValue) {
             if ($dataValue[0] == $value[0]) {
                 $searchKey = $dataKey;
+                break;
             }
         }
         $sum += ($data[$searchKey][2] * $value[1]);
