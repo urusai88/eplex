@@ -49,18 +49,6 @@ function array_to_string($array): string
     return '[' . join(', ', $parts) . ']';
 }
 
-function compare_arrays(array $arr1, array $arr2): bool
-{
-    if (count($arr1) != count($arr2)) {
-        return false;
-    }
-    var_dump($arr2);
-    foreach ($arr1 as $k => $v) {
-        var_dump(array_search($v, $arr2));
-    }
-    return false;
-}
-
 function f($data, $n): array|null
 {
     $data = prepare($data, $n);
