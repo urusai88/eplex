@@ -1,5 +1,5 @@
 <?php
-function cmpNumber($a, $b): int
+function compare_number($a, $b): int
 {
     if ($a > $b) {
         return 1;
@@ -19,7 +19,7 @@ function prepare($data, $n): array
         $v['pc'] = intval(floor($v[1] / $v[3]));
         return $v;
     }, $data);
-    usort($data, fn($a, $b) => cmpNumber($a['ppp'], $b['ppp']));
+    usort($data, fn($a, $b) => compare_number($a['ppp'], $b['ppp']));
     return $data;
 }
 
@@ -83,10 +83,10 @@ function f($data, $n): array
                     }
                     $result[] = [$data[$i2][0], $pc2 * $data[$i2][3]];
                 }
-                usort($result, fn($a, $b) => cmpNumber($a[0], $b[0]));
+                usort($result, fn($a, $b) => compare_number($a[0], $b[0]));
                 $found[] = [
                     'result' => $result,
-                    'sum' => computeCost($data, $result),
+                    'sum' => compute_cost($data, $result),
                 ];
             } else if ($left < 0) {
                 break;
@@ -94,12 +94,12 @@ function f($data, $n): array
         }
     } while (($current = n($current, $cap)) != null);
 
-    usort($found, fn($a, $b) => cmpNumber($a['sum'], $b['sum']));
+    usort($found, fn($a, $b) => compare_number($a['sum'], $b['sum']));
 
     return $found[0]['result'];
 }
 
-function computeCost($data, $result): int
+function compute_cost($data, $result): int
 {
     $sum = 0;
     foreach ($result as $value) {
@@ -149,7 +149,7 @@ foreach ($data as $i => $v) {
     $expect = $v[2];
     $k = $i + 1;
     echo "---\n";
-    echo "Result #$k: " . array_to_string($result) . '; sum: ' . computeCost($v[0], $result) . PHP_EOL;
-    echo "Expect #$k: " . array_to_string($expect) . '; sum: ' . computeCost($v[0], $expect) . PHP_EOL;
+    echo "Result #$k: " . array_to_string($result) . '; sum: ' . compute_cost($v[0], $result) . PHP_EOL;
+    echo "Expect #$k: " . array_to_string($expect) . '; sum: ' . compute_cost($v[0], $expect) . PHP_EOL;
 }
 
