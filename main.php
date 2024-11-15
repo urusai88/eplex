@@ -39,7 +39,7 @@ function n($current, $cap)
 function array_to_string($array): string
 {
     $parts = [];
-    foreach ($array as $key => $value) {
+    foreach ($array as $value) {
         if (is_array($value)) {
             $parts[] = array_to_string($value);
         } else {
