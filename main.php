@@ -75,22 +75,21 @@ function f($data, $n): array
         foreach ($current as $i1 => $pc1) {
             $count = ($pc1 * $data[$i1][3]);
             $left -= $count;
-            if ($left == 0) {
-                $result = [];
-                foreach ($current as $i2 => $pc2) {
-                    if ($pc2 == 0) {
-                        continue;
-                    }
-                    $result[] = [$data[$i2][0], $pc2 * $data[$i2][3]];
+        }
+
+        if ($left == 0) {
+            $result = [];
+            foreach ($current as $i2 => $pc2) {
+                if ($pc2 == 0) {
+                    continue;
                 }
-                usort($result, fn($a, $b) => compare_number($a[0], $b[0]));
-                $found[] = [
-                    'result' => $result,
-                    'sum' => compute_cost($data, $result),
-                ];
-            } else if ($left < 0) {
-                break;
+                $result[] = [$data[$i2][0], $pc2 * $data[$i2][3]];
             }
+            usort($result, fn($a, $b) => compare_number($a[0], $b[0]));
+            $found[] = [
+                'result' => $result,
+                'sum' => compute_cost($data, $result),
+            ];
         }
     } while (($current = n($current, $cap)) != null);
 
@@ -141,7 +140,7 @@ $result3 = [[111, 6], [222, 20], [333, 50]];
 $data = [
     [$data1, 76, $result1],
     [$data2, 76, $result2],
-    [$data2, 76, $result3],
+    [$data3, 76, $result3],
 ];
 
 foreach ($data as $i => $v) {
