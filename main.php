@@ -61,7 +61,7 @@ function compare_arrays(array $arr1, array $arr2): bool
     return false;
 }
 
-function f($data, $n): array
+function f($data, $n): array|null
 {
     $data = prepare($data, $n);
     $cap = array_map(fn($v) => $v['pc'], $data);
@@ -94,6 +94,10 @@ function f($data, $n): array
     } while (($current = n($current, $cap)) != null);
 
     usort($found, fn($a, $b) => compare_number($a['sum'], $b['sum']));
+
+    if (count($found) == 0) {
+        return [];
+    }
 
     return $found[0]['result'];
 }
